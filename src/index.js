@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './containers/App';
 import {Provider} from "react-redux"
-import store from "./containers/store/store";
+import {store} from "./redux/store";
+import Calculator from "./containers/Calculator/Calculator";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App/>
+            <Calculator/>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
