@@ -7,10 +7,12 @@ const countReducer = (state = initialState, action) => {
         case "increment":
             return {...state, counter: state.counter + 1};
         case "decriment":
+            if (state.counter === 0) return state
             return {...state, counter: state.counter - 1};
         case "incrOnValue":
             return {...state, counter: state.counter + payload};
         case "descrOnValue":
+            if (state.counter === 0) return state
             return {...state, counter: state.counter - payload};
         default:
             return state
