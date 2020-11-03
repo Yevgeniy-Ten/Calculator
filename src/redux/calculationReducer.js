@@ -1,49 +1,63 @@
-import {CLEAR, MODIFY, RESULT} from "./CalcTypes";
+import {CLEAR, IN_PERCENT, VALUE_CHANGE, POS_NEG, RESULT, CALC_ACTIONS} from "./CalcTypes";
 
-const isModifyEl = (el) => {
-    const modifyElements = "*/+-"
-    return modifyElements.includes(el)
-}
 const handlers = {
-    [MODIFY]: (state, {payload}) => {
+    [VALUE_CHANGE]: (state, {payload}) => {
         const inValidChange = +payload === 0 && state.value === 0
         if (inValidChange) {
             return state
         }
-        const isFirstChange = state.value === 0;
-        if (isFirstChange) {
-            return {...state, value: payload, maths: payload}
+        if (state.isNewCalc) {
+            return {...state, value: payload, result: payload, isNewCalc: false, isInProcess: false}
         }
-        const isModifyElement = isModifyEl(payload)
-        if (isModifyElement) {
-            const lastEl = state.maths[state.maths.length - 1]
-            const elReplace = payload !== lastEl && isModifyEl(lastEl)
-            if (elReplace) {
-                let mathsCopy = state.maths
-                mathsCopy = mathsCopy.substring(0, mathsCopy.length - 1) + payload
-                return {...state, maths: mathsCopy, value: payload}
-            } else {
-                return {...state, value: payload, maths: state.maths + payload}
-            }
+        if (state.isInProcess) {
+            return {...state, value: payload, result: state.result + payload, isInProcess: false}
         }
         const isBadLength = state.value.length >= state.valueBadLength
         if (isBadLength) {
             return state
         }
-        return {...state, value: state.value + payload, maths: state.maths + payload}
+        return {...state, value: state.value + payload, result: state.result + payload}
     },
-    [CLEAR]: (state) => ({...state, value: 0, maths: ""}),
-    [RESULT]: (state) => {
-        if (state.maths.length) {
-            const lastEl = state.maths[state.maths.length - 1]
-            const inValidResult = isModifyEl(lastEl)
-            if (inValidResult) {
-                return state
+    [CALC_ACTIONS]: (state, {payload}) => {
+        const calcActions = "*/+-"
+        const lastEl = state.result[state.result.length - 1]
+        const validCalc = !calcActions.includes(lastEl)
+        if (validCalc) {
+            return {...state, result: state.result + payload, isNewCalc: false, isInProcess: true}
+        }
+        const isActionReplace = payload !== lastEl
+        if (isActionReplace) {
+            let resultCopy = state.result
+            resultCopy = resultCopy.substring(0, resultCopy.length - 1) + payload
+            return {...state, result: resultCopy}
+        }
+        return state
+    },
+    [IN_PERCENT]: (state) => {
+        return {...state, value: +state.value * 0.01, result: state.result + "*0.01", isNewCalc: true}
+    },
+    [POS_NEG]: (state) => {
+        if (state.isNewCalc) return state
+        const negative = "-"
+        const isNegative = state.value[0] === negative
+        if (isNegative) {
+            return {
+                ...state,
+                value: state.value.slice(1),
+                result: state.result.slice(1)
             }
-            let result = eval(state.maths).toString()
-            result = result.slice(0, state.valueBadLength)
-            result = +result  //0.1 +0.2 fixed, чтобы после . не было нулей))
-            return {...state, value: result, maths: result}
+        } else {
+            return {...state, value: negative + state.value, result: negative + state.result}
+        }
+    },
+    [CLEAR]: (state) => ({...state, value: 0, result: "", isInProcess: true, isNewCalc: true}),
+    [RESULT]: (state) => {
+        const validGetResult = !state.isInProcess && state.result.length
+        if (validGetResult) {
+            let result = eval(state.result).toString()
+            const isBadLength = result.length >= state.valueBadLength
+            result = isBadLength ? +result.slice(0, state.valueBadLength) : +result
+            return {...state, value: result, result: result, isNewCalc: true}
         }
         return state
     },
@@ -51,11 +65,13 @@ const handlers = {
 }
 const initialState = {
     value: 0,
-    maths: "",
+    result: "",
     valueBadLength: 9,
-    valueIsPositive: false,
+    isNewCalc: true,
+    isInProcess: true,
 }
 const calculationReducer = (state = initialState, action) => {
+    console.log(state)
     const {type} = action
     const handle = handlers[type] || handlers.DEFAULT
     return handle(state, action)
