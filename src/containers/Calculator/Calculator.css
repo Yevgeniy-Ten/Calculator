@@ -10,6 +10,14 @@
     width: 100%;
 }
 
+.Calculator__result--md {
+    font-size: 3.8rem;
+}
+
+.Calculator__result--sm {
+    font-size: 3rem
+}
+
 .Calculator__btns {
     display: flex;
     flex-wrap: wrap;
@@ -32,6 +40,8 @@
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s;
+    z-index: 1000;
+    position: relative;
 }
 
 .Calculator__btn:active {
