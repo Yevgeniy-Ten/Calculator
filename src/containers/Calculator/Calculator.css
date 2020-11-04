@@ -3,6 +3,7 @@
 }
 
 .Calculator__result {
+    text-overflow: ellipsis;
     margin: 0;
     font-size: 4.5rem;
     font-weight: lighter;

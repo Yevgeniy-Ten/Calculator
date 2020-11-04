@@ -42,9 +42,14 @@ const handlers = {
         return {...state, value: state.value + ".", result: state.result + ".", isDecimal: true}
     },
     [IN_PERCENT]: (state) => {
-        const inValidPercent = state.isNewCalc || state.isDecimal || state.value === state.errorMes || state.isInProcess
+        const inValidPercent = state.isDecimal || state.value === state.errorMes || state.isInProcess
         if (inValidPercent) return state
-        return {...state, value: +state.value * 0.01, result: state.result + "*0.01", isNewCalc: true}
+        return {
+            ...state,
+            value: (+state.value / 100),
+            result: state.result + "/100",
+            isNewCalc: true
+        }
     },
     [POS_NEG]: (state) => {
         if (state.value === state.errorMes || state.isDecimal) return state
@@ -78,7 +83,7 @@ const handlers = {
                 return {...state, value: state.errorMes, result: "", isNewCalc: true, isInProcess: true}
             }
             const isBadLength = result.length >= state.valueBadLength
-            result = isBadLength ? +result.slice(0, state.valueBadLength) : +result
+            result = isBadLength ? result.slice(0, state.valueBadLength) : result
             return {...state, value: result, result: result, isNewCalc: true}
         }
         return state
@@ -95,9 +100,9 @@ const initialState = {
     isDecimal: false
 }
 const calculationReducer = (state = initialState, action) => {
+    console.log(state)
     const {type} = action
     const handle = handlers[type] || handlers.DEFAULT
-    debugger
     return handle(state, action)
 }
 export default calculationReducer
