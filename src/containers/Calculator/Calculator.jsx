@@ -38,91 +38,88 @@ const Calculator = () => {
                 {value}
             </p>
             <div className="Calculator__btns">
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onClear} className="Calculator__btn Calculator__btn--gray">C</button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onPositiveNegative}
-                            className="Calculator__btn Calculator__btn--gray">+/-
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onPercent} className="Calculator__btn Calculator__btn--gray">%</button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onCalcActions} data-action="/"
-                            className="Calculator__btn Calculator__btn--orange">&#247;</button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="7" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">7
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="8" onClick={onValueChange} className="Calculator__btn Calculator__btn--dark">8
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="9" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">9
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onCalcActions} data-action="*"
-                            className="Calculator__btn Calculator__btn--orange">&times;</button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="4" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">4
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="5" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">5
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="6" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">6
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onCalcActions} data-action="-"
-                            className="Calculator__btn Calculator__btn--orange">-
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="1" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">1
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="2" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">2
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button data-value="3" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">3
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onCalcActions} data-action="+"
-                            className="Calculator__btn Calculator__btn--orange">+
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap Calculator__btn--large">
-                    <button data-value="0" onClick={onValueChange}
-                            className="Calculator__btn Calculator__btn--dark">0
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onDecimal} className="Calculator__btn Calculator__btn--dark">,
-                    </button>
-                </div>
-                <div className="Calculator__btn-wrap">
-                    <button onClick={onResult} className="Calculator__btn Calculator__btn--orange">=</button>
-                </div>
+
+                <button onClick={onClear} className="Calculator__btn Calculator__btn--gray">C</button>
+
+
+                <button onClick={onPositiveNegative}
+                        className="Calculator__btn Calculator__btn--gray">+/-
+                </button>
+
+
+                <button onClick={onPercent} className="Calculator__btn Calculator__btn--gray">%</button>
+
+
+                <button onClick={onCalcActions} data-action="/"
+                        className="Calculator__btn Calculator__btn--orange">&#247;</button>
+
+
+                <button data-value="7" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">7
+                </button>
+
+
+                <button data-value="8" onClick={onValueChange} className="Calculator__btn Calculator__btn--dark">8
+                </button>
+
+                <button data-value="9" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">9
+                </button>
+
+
+                <button onClick={onCalcActions} data-action="*"
+                        className="Calculator__btn Calculator__btn--orange">&times;</button>
+
+
+                <button data-value="4" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">4
+                </button>
+
+
+                <button data-value="5" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">5
+                </button>
+
+
+                <button data-value="6" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">6
+                </button>
+
+
+                <button onClick={onCalcActions} data-action="-"
+                        className="Calculator__btn Calculator__btn--orange">-
+                </button>
+
+
+                <button data-value="1" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">1
+                </button>
+
+
+                <button data-value="2" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">2
+                </button>
+
+
+                <button data-value="3" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark">3
+                </button>
+
+
+                <button onClick={onCalcActions} data-action="+"
+                        className="Calculator__btn Calculator__btn--orange">+
+                </button>
+
+
+                <button data-value="0" onClick={onValueChange}
+                        className="Calculator__btn Calculator__btn--dark Calculator__btn--large">0
+                </button>
+
+
+                <button onClick={onDecimal} className="Calculator__btn Calculator__btn--dark">,
+                </button>
+
+                <button onClick={onResult} className="Calculator__btn Calculator__btn--orange">=</button>
             </div>
         </div>
     </LayoutIos>

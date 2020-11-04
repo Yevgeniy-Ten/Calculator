@@ -42,7 +42,7 @@ const handlers = {
         return {...state, value: state.value + ".", result: state.result + ".", isDecimal: true}
     },
     [IN_PERCENT]: (state) => {
-        const inValidPercent = state.isNewCalc || state.isDecimal || state.value === state.errorMes
+        const inValidPercent = state.isNewCalc || state.isDecimal || state.value === state.errorMes || state.isInProcess
         if (inValidPercent) return state
         return {...state, value: +state.value * 0.01, result: state.result + "*0.01", isNewCalc: true}
     },
@@ -97,6 +97,7 @@ const initialState = {
 const calculationReducer = (state = initialState, action) => {
     const {type} = action
     const handle = handlers[type] || handlers.DEFAULT
+    debugger
     return handle(state, action)
 }
 export default calculationReducer

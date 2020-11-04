@@ -22,19 +22,16 @@
 .Calculator__btns {
     display: flex;
     flex-wrap: wrap;
-}
-
-.Calculator__btn-wrap {
-    flex-basis: 25%;
-    padding: 3px;
+    justify-content: space-between;
 }
 
 .Calculator__btn {
     border: 0;
     font-size: 25px;
-    width: 55px;
+    flex-basis: 20%;
+    padding: 3px;
+    margin: 5px;
     height: 55px;
-    padding: 0 18px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,9 +54,10 @@
     flex-grow: 1;
 }
 
-.Calculator__btn--large .Calculator__btn {
+.Calculator__btn.Calculator__btn--large {
     width: 100%;
     border-radius: 30px;
+    padding-left: 18px;
     justify-content: flex-start;
 }
 
