@@ -42,7 +42,8 @@ const handlers = {
         return {...state, value: state.value + ".", result: state.result + ".", isDecimal: true}
     },
     [IN_PERCENT]: (state) => {
-        if (state.value === state.errorMes || state.isDecimal) return state
+        const inValidPercent = state.isNewCalc || state.isDecimal || state.value === state.errorMes
+        if (inValidPercent) return state
         return {...state, value: +state.value * 0.01, result: state.result + "*0.01", isNewCalc: true}
     },
     [POS_NEG]: (state) => {
@@ -66,10 +67,11 @@ const handlers = {
             return {...state, value: negative + state.value, result: negative + state.result}
         }
     },
-    [CLEAR]: (state) => ({...state, value: 0, result: "", isInProcess: true, isNewCalc: true}),
+    [CLEAR]: (state) => ({...state, value: "0", result: "0", isInProcess: true, isNewCalc: true}),
     [RESULT]: (state) => {
         const validGetResult = !state.isInProcess && state.result.length && !state.isDecimal
         if (validGetResult) {
+            // eslint-disable-next-line no-eval
             let result = eval(state.result).toString()
             const infinityResult = result === "Infinity"
             if (infinityResult) {
