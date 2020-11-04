@@ -47,7 +47,7 @@ const handlers = {
         return {
             ...state,
             value: (+state.value / 100),
-            result: state.result + "/100",
+            result: (state.result) + "/100",
             isNewCalc: true
         }
     },
@@ -100,7 +100,6 @@ const initialState = {
     isDecimal: false
 }
 const calculationReducer = (state = initialState, action) => {
-    console.log(state)
     const {type} = action
     const handle = handlers[type] || handlers.DEFAULT
     return handle(state, action)
